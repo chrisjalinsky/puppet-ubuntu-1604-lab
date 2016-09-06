@@ -1,0 +1,9 @@
+---
+
+- name: run systemctl daemon-reload
+  shell: systemctl daemon-reload
+
+- name: restart puppet server
+  service:
+    name: puppetserver
+    state: restarted

@@ -1,0 +1,13 @@
+---
+
+- name: Update and install Puppet-agent
+  apt:
+    name: "puppet-agent"
+    update_cache: yes
+
+- name: Template puppet conf
+  template:
+    src: "etc/puppetlabs/puppet/agent-puppet.conf.j2"
+    dest: "/etc/puppetlabs/puppet/puppet.conf"
+  notify:
+    - run systemctl deamon-reload

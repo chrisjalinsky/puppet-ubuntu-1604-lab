@@ -1,0 +1,5 @@
+[puppet_master_servers]
+puppet1.lan
+
+[puppet_client_servers]
+client1.lan

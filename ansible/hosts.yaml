@@ -1,0 +1,24 @@
+---
+
+puppet_master_servers:
+  hosts: [ puppet1.lan ]
+  vars:
+    ansible_ssh_user: vagrant
+    ansible_ssh_private_key_file: "~/.vagrant.d/insecure_private_key"
+puppet_client_servers:
+  hosts: [ client1.lan ]
+  vars:
+    ansible_ssh_user: vagrant
+    ansible_ssh_private_key_file: "~/.vagrant.d/insecure_private_key"
+all:
+  children: [ puppet_master_servers, puppet_client_servers ]
+_meta:
+  hostvars:
+    puppet1.lan:
+      vagrant_cpu: "1"
+      vagrant_mem: "4096"
+      vagrant_ip: "10.30.0.222"
+    client1.lan:
+      vagrant_cpu: "1"
+      vagrant_mem: "4096"
+      vagrant_ip: "10.30.0.223"

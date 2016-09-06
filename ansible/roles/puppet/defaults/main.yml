@@ -1,0 +1,9 @@
+---
+
+puppet_role: "client"
+puppet_java_version: "8"
+puppet_java_home: "/usr/lib/jvm/java-{{ puppet_java_version }}-oracle"
+
+# puppet-agent for clients
+puppet_hostname: "{{ ansible_fqdn }}"
+puppet_master_hostname: "puppet"

@@ -1,0 +1,18 @@
+---
+
+- hosts: puppet_master_servers
+  become: yes
+  become_user: root
+
+  roles:
+    - role: puppet
+      puppet_role: 'master'
+
+- hosts: puppet_client_servers
+  become: yes
+  become_user: root
+
+  roles:
+    - role: puppet
+      puppet_role: 'client'
+      puppet_master_hostname: "puppet1.lan"

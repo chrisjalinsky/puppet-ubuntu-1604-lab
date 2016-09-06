@@ -1,0 +1,40 @@
+---
+
+- name: Download apt packages (ntp)
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - ntp
+    - ntpdate
+
+- name: Sync ntp udpate with time servers
+  shell: ntpdate -u 0.ubuntu.pool.ntp.org
+  args:
+    executable: /bin/bash
+
+- name: Ensure timezone set
+  shell: timedatectl set-timezone America/Denver
+
+- name: download Puppet Apt deb
+  get_url:
+    url: "https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb"
+    dest: "/tmp/puppetlabs-release-pc1-xenial.deb"
+
+- name: Dpkg install Puppet deb
+  shell: dpkg -i /tmp/puppetlabs-release-pc1-xenial.deb
+
+- name: Update apt
+  apt:
+    update_cache: yes
+
+- name: Include when server
+  when: puppet_role == 'master'
+  include: server.yml
+
+- name: Include when client
+  when: puppet_role == 'client'
+  include: client.yml
+    
+
