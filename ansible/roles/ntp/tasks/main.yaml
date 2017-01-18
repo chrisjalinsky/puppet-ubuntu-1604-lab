@@ -1,0 +1,18 @@
+---
+
+- name: Install ntp
+  apt:
+    name: ntp
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Template ntp
+  template:
+    src: ntp.conf
+    dest: "/etc/ntp.conf"
+    backup: yes
+
+- name: Ensure ntp started
+  service:
+    name: ntp
+    state: started

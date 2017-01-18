@@ -47,6 +47,12 @@
     - run systemctl deamon-reload
     - restart puppet server
 
+- name: Template example manifest
+  template:
+    src: "etc/puppetlabs/code/environments/production/manifests/site.pp"
+    dest: "/etc/puppetlabs/code/environments/production/manifests/site.pp"
+    backup: yes
+
 - name: Service start
   service:
     name: puppetserver
